@@ -17,8 +17,8 @@ def main():
             running_sum = pyramid[i][0]
             continue
         for j in range(len(pyramid[i])):
-            top_sum = pyramid[max(0, i-1)][max(0, j-1)]
-            right_sum = pyramid[max(0, i-1)][min(len(pyramid[max(0, i-1)]) - 1, j)]
+            top_sum = pyramid[i-1][max(0, j-1)]
+            right_sum = pyramid[i-1][min(len(pyramid[i-1]) - 1, j)]
             running_sum = max(top_sum, right_sum)
             pyramid[i][j] = running_sum + pyramid[i][j]
     return max(pyramid[len(pyramid) - 1])

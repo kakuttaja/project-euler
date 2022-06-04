@@ -26,8 +26,6 @@ def main():
             else:
                 if j > 0:
                     value = grid[i][j - 1]
-                else:
-                    value = grid[i][j]
             grid[i][j] += value
     return grid[-1][-1]
 

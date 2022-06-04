@@ -17,7 +17,6 @@ def main():
         for j in range(0, len(grid[i])):
             if i == 0 and j == 0:
                 continue
-            value = 0
             if i > 0:
                 if j > 0:
                     value = min(grid[i - 1][j], grid[i][j - 1])

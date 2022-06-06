@@ -1,19 +1,14 @@
-
+from math import log10
 
 def main():
-    # The period of the repeating sequences in numbers 
-    # is the smallest power of 10 that is divisible by (denominator - 1)
-    # In other words, 10**period % j == 1
-    ans = 0
-    best = 0
-    for i in range(1, 1000):
-        for j in range(1, i):
-            if 10**j % i == 1:
-                if j > best:
-                    best = j
-                    ans = i
-                break
-    return ans, best
+    a, b = 0, 1
+    idx = 1
+    digits = 1000
+    while True:
+        a, b = b, a + b
+        if int(log10(a)+1) == digits:
+            return idx
+        idx += 1
 
 if __name__ == '__main__':
     print(main())

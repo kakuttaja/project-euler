@@ -4,6 +4,7 @@ from eulerlib.numtheory import gcd
 def euclid(m: int, n: int) -> tuple[int, int, int]:
     return sum([m**2 - n**2, 2 * m * n, m**2 + n**2])
 
+
 def main() -> int:
     # The question is about Pythagorean triples
     # https://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple

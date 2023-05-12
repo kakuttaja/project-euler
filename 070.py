@@ -31,7 +31,13 @@ def check_digits(a, b) -> bool:
     return sorted(int(i) for i in str(a)) == sorted(int(i) for i in str(b))
 
 def phi(p1, p2) -> int:
-    return (p1-1)*(p2-1)
+    # phi(n) = n * T(p|n)(1 - 1/p)
+    # Therefore if n = product([p]),
+    # then phi(n) = product([p - 1])
+    # 
+    # In other words: (p1 * p2) = n,
+    # phi(n) = (p1 * p2) * (1 - 1/p1) * (1 - 1/p2)
+    return (p1 * p2) * (1 - 1/p1) * (1 - 1/p2)
 
 def main():
     # To minimize phi(n), we need to minimise len(prime_factors) and maximise sum(prime_factors)
@@ -46,7 +52,6 @@ def main():
     lowest = 99999999
     limit = 10**7
     primes = prime_list(int(limit**0.5) + 10**5)
-    a = max(primes)
     for i in range(len(primes) - 1):
         for j in range(i + 1, len(primes)):
             p1 = primes[i]
@@ -57,11 +62,10 @@ def main():
                 if (p1*p2)/n < lowest:
                     lowest = (p1*p2)/n
                     ans = p1*p2
-                    # print(">", p1, p2, p1*p2)
     return ans
 
 if __name__ == '__main__':
-    import time
-    start = time.time()
+    from time import perf_counter
+    start = perf_counter()
     print(main())
-    print(f"Time taken: {round(time.time() - start, 2)}s")
+    print(f"Time taken: {round(perf_counter() - start, 2)}s")

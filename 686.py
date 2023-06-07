@@ -27,21 +27,6 @@ def main():
             n += 1
     return n
 
-def old_main():
-    # This is the original function using the same formula as the new one.
-    values = 0
-    target = 678910
-    L = 123
-    n = 1 
-    k = 3
-    while True:
-        b = int(10**(n*log10(2)-int(1+(n*log10(2)))+k))
-        if b == L:
-            values += 1
-            if values == target:
-                return n
-        n += 1
-
 if __name__ == '__main__':
     import time
     s = time.time()

@@ -1,19 +1,26 @@
+from time import perf_counter
+from collections import defaultdict
 
 def main() -> int:
-    coins = [200, 100, 50, 20, 10, 5, 2, 1]
-    target = 200
-    def rec(target: int, idx: int) -> int:
-        total = 0
-        if idx == 7: return 1
-        for i in range(idx, len(coins)):
-            if target - coins[i] == 0: total += 1
-            if target - coins[i] > 0: total += rec(target - coins[i], i)
-        return total
-
-    return rec(target, 0)
+    coins = [1, 2, 5, 10, 20, 50, 100, 200]
+    cache = defaultdict(lambda: 0)
+    cache[0] = 1
+    for coin in coins:
+        # Calculate the number of ways for each coin
+        # to produce a certain number
+        # e.g. 1p has exactly one way to produce every number.
+        # 
+        # By bottom-up solving, all numbers end up with
+        # a total number of ways they can be made with
+        # all the possible different coins.
+        for m in range(1, 201):
+            remainder = m - coin
+            if remainder < 0:
+                continue
+            cache[m] += cache[remainder]
+    return cache[200]
 
 if __name__ == '__main__':
-    from time import perf_counter
     start = perf_counter()
     print(main())
-    print(f"This took {round(perf_counter() - start, 2)}s")
+    print(f"This took {round(perf_counter() - start, 4)}s")

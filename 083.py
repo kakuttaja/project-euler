@@ -5,7 +5,7 @@ import os
 
 def get_map() -> tuple:
     map = []
-    with open(f"{os.path.dirname(__file__)}\\083.txt", "r") as f:
+    with open(f"083.txt", "r") as f:
         for l in f.readlines():
             map.append(tuple([int(i) for i in l.strip().split(",")]))
     return tuple(map)

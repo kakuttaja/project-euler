@@ -1,11 +1,10 @@
 from time import perf_counter
 from queue import PriorityQueue
 from math import inf
-import os
 
 def get_map() -> tuple:
     map = []
-    with open(f"{os.path.dirname(__file__)}\\082.txt", "r") as f:
+    with open(f"082.txt", "r") as f:
         for l in f.readlines():
             map.append(tuple([int(i) for i in l.strip().split(",")]))
     return tuple(map)
@@ -38,10 +37,9 @@ def main() -> None:
         state = (x, _y), map[_y][x], None
         queue.put((map[_y][x], state))
         while not queue.empty():
-            try:
-                dist, state = queue.get(False)
-            except:
-                continue
+            if queue.empty():
+                break
+            dist, state = queue.get(False)
             (x, y), dist, dir = state
             moves[(x, y, dir)] = dist
             if x == end:
